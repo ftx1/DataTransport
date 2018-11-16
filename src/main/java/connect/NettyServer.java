@@ -8,6 +8,7 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.codec.string.StringDecoder;
 import io.netty.util.AttributeKey;
 
 /**
@@ -42,7 +43,8 @@ public class NettyServer {
                 }).childHandler(new ChannelInitializer<NioSocketChannel>() {
             @Override
             protected void initChannel(NioSocketChannel ch) throws Exception {
-                System.out.println(ch.attr(clientKey).get());
+                ch.pipeline().addLast(new StringDecoder());
+                ch.pipeline().addLast(new FirstServerHandler());
             }
         });
 
