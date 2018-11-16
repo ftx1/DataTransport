@@ -1,0 +1,9 @@
+package netty;
+
+option java_package = "self.design.message.protobuf";
+option java_outer_classname = "StreamDataProto";
+
+message SteamData{
+required string type = 1;
+optional string data = 2;
+}
